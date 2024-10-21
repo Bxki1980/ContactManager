@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Contact>
+
+<h1>Contact List</h1>
+<a href="@Url.Action("Create")">Add New Contact</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Category</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var contact in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(contact.FirstName, "Details", new { id = contact.ContactId })</td>
+                <td>@Html.ActionLink(contact.LastName, "Details", new { id = contact.ContactId })</td>
+                <td>@contact.Phone</td>
+                <td>@contact.Email</td>
+                <td>@contact.Category.Name</td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = contact.ContactId })">Edit</a> |
+                    <a href="@Url.Action("Delete", new { id = contact.ContactId })">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
